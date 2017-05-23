@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Definimos la accion -->
+ 
+        <record model="ir.actions.act_window" id="citas_list_action">
+            <field name="name">Citas</field>
+            <field name="res_model">citas.cita</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Cree la primera cita</p>
+            </field>
+        </record>
+
+	<!-- Creamos el menú -->
+	<!-- Menú principal (el que va en la barra principal de menús)-->
+
+        <menuitem
+                id="main_menu_citas"
+                name="Citas Diarias"		    
+            />
+
+	<!-- Submenu principal-->
+        <menuitem
+                id="menu_citas"
+                name="Citas"	
+		parent="main_menu_citas"
+		sequence="20"   
+            />
+
+	<!-- Submenu principal-->
+	 <menuitem
+                id="citas_menu"
+                name="Cita"	
+		parent="menu_citas"
+		sequence="20"
+		action="citas_list_action"	    
+         />
+
+	<!-- Vista formulario-->
+        <record model="ir.ui.view" id="view_citas_form">
+            <field name='name'>view.citas.cita.form</field>
+            <field name="model">citas.cita</field>
+            <field name="arch" type="xml">
+                <form string="cita form" version="7.0">
+                    <sheet>
+                        <group colspan="2" col="2">
+                            <group>                               
+                                <field name="autor"/>
+                            </group>
+                            <group>
+                                <field name="orden"/>
+                            </group>
+                        </group>
+                        <group colspan="2" col="2">
+                            <group>                               
+                                <field name="cita"/>
+                            </group>
+                            <group>
+                                <field name="fecha"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+	<!-- Vista árbol-->
+        <record model="ir.ui.view" id="view_citas_tree">
+            <field name="name">view.citas.cita.tree</field>
+            <field name="model">citas.cita</field>
+            <field name="arch" type="xml">
+                <tree string="Idea list">
+                    <field name="cita"/>
+                    <field name="autor"/>
+		    <field name="orden"/>
+		    <field name="fecha"/>
+                </tree>
+            </field>
+        </record>
+
+	<!-- Vista búsqueda-->
+	<record id="view_filter_citas" model="ir.ui.view">
+    		<field name="name">Citas Filter</field>
+    		<field name="model">citas.cita</field>
+    		<field name="arch" type="xml">
+        		<search>
+           			<field name="autor"/>
+            			<filter string="autor"/>
+           			<filter string="cita"/>
+				<filter string="fecha"/>
+       			</search>
+    		</field>
+	</record>
+ 
+        
+ 
+    </data>
+</openerp>
